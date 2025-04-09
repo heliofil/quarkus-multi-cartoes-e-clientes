@@ -1,10 +1,8 @@
 package br.com.h3pro.mapper;
 
-import br.com.h3pro.domain.Bandeira;
 import br.com.h3pro.domain.Cartao;
 
 import br.com.h3pro.domain.Pedido;
-import br.com.h3pro.domain.dto.BandeiraDTO;
 import br.com.h3pro.domain.dto.CartaoDTO;
 
 import br.com.h3pro.domain.dto.PedidoDTO;
@@ -31,15 +29,7 @@ public interface CartaoMapper {
     @Mapping(source="cpf", target="cpf")
     @Mapping(source="bandeira", target="bandeira")
     Cartao mapCartao(CartaoDTO cartaoDTO);
-
-    @Mapping(source="codigo", target="id")
-    @Mapping(source="nome", target="nome")
-    Bandeira mapBandeira(BandeiraDTO bandeiraDTO);
-
-    @Mapping(source="id", target="codigo")
-    @Mapping(source="nome", target="nome")
-    BandeiraDTO mapBandeira(Bandeira bandeira);
-
+    
     @Mapping(source="idCartao", target="idCartao")
     @Mapping(source="situacao", target="situacao")
     @Mapping(source="dataEntrega", target="dataCriacao")

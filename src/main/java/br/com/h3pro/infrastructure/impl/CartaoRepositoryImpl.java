@@ -34,14 +34,10 @@ public class CartaoRepositoryImpl implements CartaoRepository {
 
     @Transactional
     @Override
-    public Boolean gravarCartao(Cartao cartao) {
-        try {
+    public Cartao gravarCartao(Cartao cartao) {
             entityManager.persist(cartao);
-            return true;
-        }catch (Exception e){
-            //Usar um log estruturado para backtrace
-            return false;
-        }
+            return cartao;
+
 
     }
 

@@ -64,6 +64,7 @@ CREATE TABLE cartao(
     INDEX (id_bandeira),
     INDEX (data_validade),
     INDEX (numero),
+    UNIQUE KEY (id_bandeira, numero),
     FOREIGN KEY (cartao_pai) REFERENCES cartao(id),
     FOREIGN KEY (id_bandeira) REFERENCES bandeira(id),
     FOREIGN KEY (cpf) REFERENCES cliente(cpf),
@@ -80,3 +81,5 @@ CREATE TABLE pedido(
     data_atualizacao TIMESTAMP,
     FOREIGN KEY (id_cartao) REFERENCES cartao(id)
 );
+
+

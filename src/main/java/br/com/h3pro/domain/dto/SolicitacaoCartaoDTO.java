@@ -1,7 +1,10 @@
 package br.com.h3pro.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class SolicitacaoCartaoDTO {
     private String cpf;
+    @JsonProperty("e-virtual")
     private Boolean eVirtual;
 
     public SolicitacaoCartaoDTO(String cpf, Boolean eVirtual) {

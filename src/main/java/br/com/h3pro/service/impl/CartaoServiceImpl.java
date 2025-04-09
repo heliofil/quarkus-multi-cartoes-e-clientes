@@ -42,9 +42,11 @@ public class CartaoServiceImpl implements CartaoService {
         SolicitacaoCartaoDTO solicitacaoCartao = new SolicitacaoCartaoDTO(cpf,eVirtual);
         CartaoDTO cartaoDTO = processadoraRepository.solicitarCartao(solicitacaoCartao);
         Cartao cartao = mapper.mapCartao(cartaoDTO);
+        cartao.setECancelado(false);
+        cartao.setEDigital(eVirtual);
         cartao.setDataCriacao(LocalDateTime.now());
-        repository.gravarCartao(cartao);
-        return cartao;
+        return repository.gravarCartao(cartao);
+
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CartaoRepository {
 
-    Boolean gravarCartao(Cartao cartao);
+    Cartao gravarCartao(Cartao cartao);
 
     List<Cartao> recuperaListaCartaoPorCpf(String cpf);
 

@@ -1,12 +1,15 @@
 package br.com.h3pro.domain.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 
 public class CartaoDTO {
     String id;
     String numero;
     int cvv;
+    @JsonProperty("data-validade")
     LocalDate dataValidade;
     String nome;
     String cpf;

@@ -2,10 +2,8 @@ package br.com.h3pro.domain;
 
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -137,6 +135,7 @@ public class Cartao extends PanacheEntityBase {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     Long id;
     @Column(name = "numero")
@@ -151,15 +150,15 @@ public class Cartao extends PanacheEntityBase {
     Boolean eDigital;
     @Column(name = "e_cancelado")
     Boolean eCancelado;
-    @Column(name = "motivo_reemissao)")
+    @Column(name = "motivo_reemissao")
     MotivoDaReemissao motivoReemissao;
-    @Column(name = "data_validade)")
+    @Column(name = "data_validade")
     LocalDate dataValidade;
-    @Column(name = "id_bandeira)")
+    @Column(name = "id_bandeira")
     int bandeira;
-    @Column(name = "data_criacao)")
+    @Column(name = "data_criacao")
     LocalDateTime dataCriacao;
-    @Column(name = "data_atualizacao)")
+    @Column(name = "data_atualizacao")
     LocalDateTime dataAtualizacao;
 
 
