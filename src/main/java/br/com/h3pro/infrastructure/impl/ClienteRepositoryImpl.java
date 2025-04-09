@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 
 import java.time.LocalDateTime;
 
+// As querys poderiam ficar no resource mas por uma questão de time estão na aplicacao
 @ApplicationScoped
 public class ClienteRepositoryImpl implements ClienteRepository {
 

@@ -3,6 +3,7 @@ package br.com.h3pro.infrastructure.impl;
 import br.com.h3pro.domain.Cartao;
 import br.com.h3pro.domain.Pedido;
 import br.com.h3pro.infrastructure.CartaoRepository;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+// As querys poderiam ficar no resource mas por uma questão de time estão na aplicacao
+@ApplicationScoped
 public class CartaoRepositoryImpl implements CartaoRepository {
     @PersistenceContext
     EntityManager entityManager;
