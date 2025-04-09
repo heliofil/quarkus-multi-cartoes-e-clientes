@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-altdb
+    environment:
+      - MYSQL_DATABASE=altdb
+      - MYSQL_USER=altbank_user
+      - MYSQL_PASSWORD=changeMeit@123
+      - MYSQL_ROOT_PASSWORD=changeMeit@123
+    ports:
+      - 3306:3306
+    volumes:
+      - ./var:/var/lib/mysql
+      - ./script/init.sql:/docker-entrypoint-initdb.d/init.sql
