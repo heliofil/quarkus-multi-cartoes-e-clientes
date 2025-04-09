@@ -76,3 +76,9 @@ Create your first JPA entity
 Easily start your RESTful Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+
+
+## INFORMAÇÕES 
+
+O script do banco se encontra em src/main/docker/mysql/script com o nome de init.sql em paralelo há um arquivo compose para criação automatica do mysql.
+Apenas necessario rodar na pasta do arquivo o comamdo "docker compose up -d" 
