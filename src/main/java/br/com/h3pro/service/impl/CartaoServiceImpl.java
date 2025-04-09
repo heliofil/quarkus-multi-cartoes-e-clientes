@@ -9,11 +9,14 @@ import br.com.h3pro.infrastructure.CartaoRepository;
 import br.com.h3pro.infrastructure.ProcessadoraRepository;
 import br.com.h3pro.mapper.CartaoMapper;
 import br.com.h3pro.service.CartaoService;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@ApplicationScoped
 public class CartaoServiceImpl implements CartaoService {
 
     @Inject
@@ -22,6 +25,7 @@ public class CartaoServiceImpl implements CartaoService {
     CartaoMapper mapper;
 
     @Inject
+    @RestClient
     ProcessadoraRepository processadoraRepository;
 
     // Poderia ser um objeto estrurado de Status/Error ou Exception ou ate um Enum de mensagens

@@ -50,7 +50,7 @@ INSERT INTO motivo_reemissao (id,nome, data_criacao, data_atualizacao) VALUES
 CREATE TABLE cartao(
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     numero VARCHAR(16) NOT NULL,
-    cvv CHAR(3) NOT NULL,
+    cvv TINYINT UNSIGNED NOT NULL,
     nome_titular VARCHAR(20) NOT NULL,
     cpf CHAR(11) NOT NULL,
     e_digital BOOL DEFAULT 0,
@@ -70,13 +70,13 @@ CREATE TABLE cartao(
     FOREIGN KEY (motivo_reemissao) REFERENCES motivo_reemissao(id)
 );
 
-CREATE TABLE pedido_cartao(
+CREATE TABLE pedido(
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_cartao BIGINT UNSIGNED NOT NULL,
-    situacao ENUM ('Emitido','Pendente','Aguardando separação','Aguardando entrega','Entregue'),
+    situacao ENUM (,
+    observacao VARCHAR(200),
+    endereco_entrega VARCHAR(250),
     data_criacao TIMESTAMP,
     data_atualizacao TIMESTAMP,
     FOREIGN KEY (id_cartao) REFERENCES cartao(id)
 );
-
-

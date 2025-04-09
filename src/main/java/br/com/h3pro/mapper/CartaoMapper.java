@@ -17,28 +17,26 @@ public interface CartaoMapper {
     @Mapping(source="id", target="id")
     @Mapping(source="numero", target="numero")
     @Mapping(source="cvv", target="cvv")
-    @Mapping(source="validadeMes", target="validadeMes")
-    @Mapping(source="validadeAno", target="validadeAno")
-    @Mapping(source="nome", target="nome")
+    @Mapping(source="dataValidade", target="dataValidade")
+    @Mapping(source="nomeTitular", target="nome")
     @Mapping(source="cpf", target="cpf")
-    @Mapping(source="badeira", target="badeira")
+    @Mapping(source="bandeira", target="bandeira")
     CartaoDTO mapCartao(Cartao cartao);
 
     @Mapping(source="id", target="id")
     @Mapping(source="numero", target="numero")
     @Mapping(source="cvv", target="cvv")
-    @Mapping(source="validadeMes", target="validadeMes")
-    @Mapping(source="validadeAno", target="validadeAno")
-    @Mapping(source="nome", target="nome")
+    @Mapping(source="dataValidade", target="dataValidade")
+    @Mapping(source="nome", target="nomeTitular")
     @Mapping(source="cpf", target="cpf")
-    @Mapping(source="badeira", target="badeira")
+    @Mapping(source="bandeira", target="bandeira")
     Cartao mapCartao(CartaoDTO cartaoDTO);
 
-    @Mapping(source="codigo", target="codigo")
+    @Mapping(source="codigo", target="id")
     @Mapping(source="nome", target="nome")
     Bandeira mapBandeira(BandeiraDTO bandeiraDTO);
 
-    @Mapping(source="codigo", target="codigo")
+    @Mapping(source="id", target="codigo")
     @Mapping(source="nome", target="nome")
     BandeiraDTO mapBandeira(Bandeira bandeira);
 

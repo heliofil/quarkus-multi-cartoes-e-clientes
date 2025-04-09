@@ -10,12 +10,12 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
+
 @Path("/cartao")
 @RegisterRestClient
-@Produces(MediaType.APPLICATION_JSON)
 public interface ProcessadoraRepository {
 
-    //Assumindo um fluxo aonde a emissao de um cartão passa de forma muito simplificada na Processadora que devolve os dados do cartao.
+    //Assumindo um fluxo aonde a emissao de um cartão passa (de forma muito simplificada) na Processadora que devolve os dados do cartao.
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

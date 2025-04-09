@@ -2,6 +2,7 @@ package br.com.h3pro.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 public class Pedido {
 
 
+    @Id
     @Column(name = "id")
     private String id;
     @Column(name = "id_cartao")

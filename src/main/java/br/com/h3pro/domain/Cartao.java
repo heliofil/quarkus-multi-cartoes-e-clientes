@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Cartao extends PanacheEntityBase {
 
 
-    public Cartao(Long id, String numero, int cvv, String nomeTitular, String cpf, Boolean eDigital, Boolean eCancelado, Boolean eReemitido, MotivoDaReemissao motivoReemissao, LocalDate dataValidade, Bandeira bandeira, LocalDateTime dataCriacao, LocalDateTime dataAtualizacao) {
+    public Cartao(Long id, String numero, int cvv, String nomeTitular, String cpf, Boolean eDigital, Boolean eCancelado, Boolean eReemitido, MotivoDaReemissao motivoReemissao, LocalDate dataValidade, int bandeira, LocalDateTime dataCriacao, LocalDateTime dataAtualizacao) {
         this.id = id;
         this.numero = numero;
         this.cvv = cvv;
@@ -69,7 +69,7 @@ public class Cartao extends PanacheEntityBase {
         return this.dataValidade;
     }
 
-    public Bandeira getBandeira() {
+    public int getBandeira() {
         return this.bandeira;
     }
 
@@ -118,7 +118,7 @@ public class Cartao extends PanacheEntityBase {
         this.dataValidade = dataValidade;
     }
 
-    public void setBandeira(Bandeira bandeira) {
+    public void setBandeira(int bandeira) {
         this.bandeira = bandeira;
     }
 
@@ -156,7 +156,7 @@ public class Cartao extends PanacheEntityBase {
     @Column(name = "data_validade)")
     LocalDate dataValidade;
     @Column(name = "id_bandeira)")
-    Bandeira bandeira;
+    int bandeira;
     @Column(name = "data_criacao)")
     LocalDateTime dataCriacao;
     @Column(name = "data_atualizacao)")
