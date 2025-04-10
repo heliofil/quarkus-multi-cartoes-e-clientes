@@ -1,13 +1,10 @@
 package br.com.h3pro.controller;
 
 import br.com.h3pro.domain.Cartao;
-import br.com.h3pro.domain.Cliente;
 import br.com.h3pro.domain.dto.CartaoDTO;
-import br.com.h3pro.domain.dto.ClienteDTO;
 import br.com.h3pro.domain.dto.SolicitacaoCartaoDTO;
 import br.com.h3pro.mapper.CartaoMapper;
 import br.com.h3pro.service.CartaoService;
-import br.com.h3pro.service.ClienteService;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;

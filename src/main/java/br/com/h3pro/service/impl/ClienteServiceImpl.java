@@ -23,7 +23,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Boolean criarCliente(Cliente cliente)  {
-        //consolidaria as informações do cliente;
+
         cliente.setAtivo(true);
         cliente.setDataCriacao(LocalDateTime.now());
         cliente.setDataAtualizacao(null);
