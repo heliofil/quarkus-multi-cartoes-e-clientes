@@ -29,6 +29,7 @@ public class WebhookResource {
 
 
     @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/delivery/status/{webkey}")
     public Response updateDeliveryStatus(@PathParam("webkey") String webkey, PedidoDTO pedido) {
@@ -50,6 +51,7 @@ public class WebhookResource {
     }
 
     @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/card/virtual/cvv/{webkey}")
     public Response changeVirtualCVV(@PathParam("webkey") String webkey, NovoCVVDTO novo) {

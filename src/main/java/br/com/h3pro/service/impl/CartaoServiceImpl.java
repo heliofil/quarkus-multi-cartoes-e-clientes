@@ -13,8 +13,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @ApplicationScoped
 public class CartaoServiceImpl implements CartaoService {
@@ -34,7 +36,7 @@ public class CartaoServiceImpl implements CartaoService {
         if(eVirtual) {
             List<Cartao> cartaoLista =  repository.recuperaListaCartaoPorCpf(cpf);
 
-            if(cartaoLista.stream().anyMatch(cartao -> !cartao.getEDigital())){
+            if(!cartaoLista.stream().anyMatch(cartao -> !cartao.getEDigital())){
                 return null;
             }
 
@@ -45,19 +47,39 @@ public class CartaoServiceImpl implements CartaoService {
         cartao.setECancelado(false);
         cartao.setEDigital(eVirtual);
         cartao.setDataCriacao(LocalDateTime.now());
-        return repository.gravarCartao(cartao);
-
+        cartao = repository.gravarCartao(cartao);
+        if(!cartao.getEDigital()) {
+            repository.gravaPedido(new Pedido(null, cartao.getId(), "Emitido", null, null, LocalDateTime.now(), null));
+        }
+        return cartao;
     }
 
     @Override
     public Boolean atualizarPedido(Pedido pedido) {
-        return repository.gravaPedido(pedido);
-
+        if(repository.gravaPedido(pedido).getId()==null) {
+            return false;
+        };
+        return true;
     }
 
+
     @Override
-    public Boolean atualizaCVV(String cpf, long idCartao, int novoCVV, LocalDateTime dataValiade) {
+    public Boolean atualizaCVV(String cpf, long idCartao, int novoCVV, LocalDate dataValiade) {
         return repository.atualizaCVV(cpf, idCartao, novoCVV, dataValiade);
+    }
+
+    // Isso no mundo real seria totalmente assincrono;
+    @Override
+    public Cartao reemitirCartao(long idCartao, int motivo) {
+        String cpf = repository.listarCPFPorCartao(idCartao);
+        if(repository.atualizaReemissao(idCartao,motivo)){
+            repository.cancelarCartoesPorCpf(cpf);
+            return solicitarCartao(cpf,false);
+        }
+
+        return null;
+
+
     }
 
 

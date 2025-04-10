@@ -8,7 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,8 +21,7 @@ public class CartaoRepositoryImpl implements CartaoRepository {
     @Transactional
     @Override
     public List<Cartao> recuperaListaCartaoPorCpf(String cpf) {
-        List<Cartao> listaCartao =  entityManager.createQuery(
-                        "SELECT c FROM cartao c WHERE c.cpf = :cpf and c.e_cancelado = false", Cartao.class)
+        List<Cartao> listaCartao =  entityManager.createQuery("SELECT c FROM Cartao c WHERE c.cpf = :cpf and c.eCancelado = false", Cartao.class)
                 .setParameter("cpf", cpf)
                 .getResultList();
         if (Objects.isNull(listaCartao)){
@@ -36,9 +35,18 @@ public class CartaoRepositoryImpl implements CartaoRepository {
     @Override
     public Cartao gravarCartao(Cartao cartao) {
             entityManager.persist(cartao);
+            entityManager.flush();
             return cartao;
 
 
+    }
+
+    @Transactional
+    @Override
+    public String listarCPFPorCartao(long idCartao) {
+        return entityManager.createQuery("SELECT c FROM Cartao c WHERE c.id=:id", Cartao.class)
+                .setParameter("id", idCartao)
+                .getSingleResult().getCpf();
     }
 
 
@@ -46,7 +54,7 @@ public class CartaoRepositoryImpl implements CartaoRepository {
     @Override
     public Boolean cancelarCartoesPorCpf(String cpf) {
         try {
-            entityManager.createQuery("UPDATE cartao SET e_cancelado=true WHERE c.cpf = :cpf ")
+            entityManager.createQuery("UPDATE Cartao c SET c.eCancelado=true, c.dataAtualizacao = CURRENT_TIMESTAMP WHERE c.cpf = :cpf ")
                     .setParameter("cpf", cpf)
                     .executeUpdate();
             return true;
@@ -59,11 +67,26 @@ public class CartaoRepositoryImpl implements CartaoRepository {
 
     @Transactional
     @Override
-    public Boolean atualizaCVV(String cpf, long idCartao, int novoCVV, LocalDateTime dataValiade) {
+    public Boolean atualizaReemissao(long idCartao,int motivo ) {
         try {
-            entityManager.createQuery("UPDATE cartao SET cvv=:cvv, data_validade=:data_validade WHERE c.cpf = :cpf and id=:id ")
+            entityManager.createQuery("UPDATE Cartao c SET c.motivoReemissao = :motivo, c.eCancelado = true, c.dataAtualizacao = CURRENT_TIMESTAMP WHERE c.id = :id")
+                    .setParameter("id", idCartao)
+                    .setParameter("motivo", motivo)
+                    .executeUpdate();
+            return true;
+        }catch (Exception e){
+            //Usar um log estruturado para backtrace
+            return false;
+        }
+    }
+
+    @Transactional
+    @Override
+    public Boolean atualizaCVV(String cpf, long idCartao, int novoCVV, LocalDate dataValiade) {
+        try {
+            entityManager.createQuery("UPDATE Cartao c SET c.cvv=:cvv, c.dataValidade=:validade,  c.dataAtualizacao = CURRENT_TIMESTAMP WHERE  c.id=:id and c.cpf=:cpf ")
                     .setParameter("cvv", novoCVV)
-                    .setParameter("data_validade", dataValiade)
+                    .setParameter("validade", dataValiade)
                     .setParameter("cpf", cpf)
                     .setParameter("id", idCartao)
                     .executeUpdate();
@@ -77,14 +100,13 @@ public class CartaoRepositoryImpl implements CartaoRepository {
 
     @Transactional
     @Override
-    public Boolean gravaPedido(Pedido pedido) {
-        try {
-            entityManager.persist(pedido);
-            return true;
-        }catch (Exception e){
-            //Usar um log estruturado para backtrace
-            return false;
-        }
+    public Pedido gravaPedido(Pedido pedido) {
+
+        entityManager.persist(pedido);
+        entityManager.flush();
+
+        return pedido;
+
 
     }
 

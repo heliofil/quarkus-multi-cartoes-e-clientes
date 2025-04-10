@@ -34,7 +34,7 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     public Boolean desativarCliente(String cpf) {
         try {
             entityManager.createQuery(
-                            "UPDATE cliente c SET c.e_ativo = false WHERE e.cpf = :cpf")
+                            "UPDATE Cliente c SET c.ativo = false, c.dataAtualizacao = CURRENT_TIMESTAMP WHERE c.cpf = :cpf")
                     .setParameter("cpf", cpf)
                     .executeUpdate();
             return true;
@@ -50,7 +50,7 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     public Boolean reativarCliente(String cpf) {
         try {
             entityManager.createQuery(
-                            "UPDATE cliente c SET c.e_ativo = true WHERE e.cpf = :cpf")
+                            "UPDATE Cliente c SET c.ativo = true, c.dataAtualizacao = CURRENT_TIMESTAMP WHERE c.cpf = :cpf")
                     .setParameter("cpf", cpf)
                     .executeUpdate();
             return true;

@@ -3,10 +3,12 @@ package br.com.h3pro.infrastructure;
 import br.com.h3pro.domain.Cartao;
 import br.com.h3pro.domain.Pedido;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CartaoRepository {
+
+    String listarCPFPorCartao(long idCartao);
 
     Cartao gravarCartao(Cartao cartao);
 
@@ -14,8 +16,10 @@ public interface CartaoRepository {
 
     Boolean cancelarCartoesPorCpf(String cpf);
 
-    Boolean gravaPedido(Pedido pedido);
+    Boolean atualizaReemissao(long idCartao, int motivo);
 
-    Boolean atualizaCVV(String cpf, long idCartao, int novoCVV, LocalDateTime dataValiade);
+    Pedido gravaPedido(Pedido pedido);
+
+    Boolean atualizaCVV(String cpf, long idCartao, int novoCVV, LocalDate dataValiade);
 
 }

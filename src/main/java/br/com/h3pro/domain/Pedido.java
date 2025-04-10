@@ -21,9 +21,9 @@ public class Pedido {
     String observacao;
     @Column(name = "endereco_entrega")
     String endereco;
-    @Column(name = "data_criacao)")
+    @Column(name = "data_criacao")
     LocalDateTime dataCriacao;
-    @Column(name = "data_atualizacao)")
+    @Column(name = "data_atualizacao")
     LocalDateTime dataAtualizacao;
 
 

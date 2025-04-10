@@ -2,6 +2,7 @@ package br.com.h3pro.controller;
 
 import br.com.h3pro.domain.Cartao;
 import br.com.h3pro.domain.dto.CartaoDTO;
+import br.com.h3pro.domain.dto.ErrorDTO;
 import br.com.h3pro.domain.dto.SolicitacaoCartaoDTO;
 import br.com.h3pro.mapper.CartaoMapper;
 import br.com.h3pro.service.CartaoService;
@@ -31,7 +32,7 @@ public class CartaoResource {
         Cartao cartao = service.solicitarCartao(solicitacao.getCpf(),solicitacao.getEVirtual());
 
         if(Objects.isNull(cartao)){
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(new Error("Não foi possivel solicitar o cartao")).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(new ErrorDTO("Não foi possivel solicitar o cartao")).build();
         }
 
         return Response.ok().entity(mapper.mapCartao(cartao)).build();
@@ -43,10 +44,23 @@ public class CartaoResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/reemissao/{idCartao}/{idMotivo}")
-    public Response reemitirCartao(long idCartao,int motivo) {
+    public Response reemitirCartao(@PathParam("idCartao") long idCartao,@PathParam("idMotivo") int motivo) {
 
+        Cartao cartao = service.reemitirCartao(idCartao,motivo);
+        if(Objects.isNull(cartao)) {
+            return Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(new ErrorDTO("Não foi possivel reemitir um novo cartão"))
+                    .build();
+        }
 
-        return Response.ok().build();
+        CartaoDTO cartaoDTO = mapper.mapCartao(cartao);
+
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(cartaoDTO)
+                .build();
+
 
     }
 

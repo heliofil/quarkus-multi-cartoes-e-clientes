@@ -40,7 +40,7 @@ public class ClienteServiceImpl implements ClienteService {
          }
 
          if(!cartaoRepository.cancelarCartoesPorCpf(cpf)) {
-             repository.reativarCliente(cpf);
+
              return false;
          }
 

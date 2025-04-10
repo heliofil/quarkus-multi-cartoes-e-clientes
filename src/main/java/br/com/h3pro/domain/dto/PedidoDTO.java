@@ -1,5 +1,6 @@
 package br.com.h3pro.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
@@ -7,18 +8,25 @@ import java.time.LocalDateTime;
 public class PedidoDTO {
 
         @JsonProperty("tracking_id")
-        private String idCartao;
+        private Long idCartao;
+
         @JsonProperty("delivery_status")
         private String situacao;
-        @JsonProperty("delivery_status")
+
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        @JsonProperty("delivery_date")
         private LocalDateTime dataEntrega;
-        @JsonProperty("delivery_status")
-        String observacao;
-        @JsonProperty("delivery_status")
-        String endereco;
 
+        @JsonProperty("delivery_return_reason")
+        private String observacao;
 
-        public PedidoDTO(String idCartao, String situacao, LocalDateTime dataEntrega, String observacao, String endereco) {
+        @JsonProperty("delivery_address")
+        private String endereco;
+
+        public PedidoDTO() {
+        }
+
+        public PedidoDTO(long idCartao, String situacao, LocalDateTime dataEntrega, String observacao, String endereco) {
                 this.idCartao = idCartao;
                 this.situacao = situacao;
                 this.dataEntrega = dataEntrega;
@@ -26,10 +34,9 @@ public class PedidoDTO {
                 this.endereco = endereco;
         }
 
-        public PedidoDTO() {
-        }
 
-        public String getIdCartao() {
+
+        public long getIdCartao() {
                 return this.idCartao;
         }
 
@@ -49,27 +56,22 @@ public class PedidoDTO {
                 return this.endereco;
         }
 
-        @JsonProperty("tracking_id")
-        public void setIdCartao(String idCartao) {
+        public void setIdCartao(long idCartao) {
                 this.idCartao = idCartao;
         }
 
-        @JsonProperty("delivery_status")
         public void setSituacao(String situacao) {
                 this.situacao = situacao;
         }
 
-        @JsonProperty("delivery_status")
         public void setDataEntrega(LocalDateTime dataEntrega) {
                 this.dataEntrega = dataEntrega;
         }
 
-        @JsonProperty("delivery_status")
         public void setObservacao(String observacao) {
                 this.observacao = observacao;
         }
 
-        @JsonProperty("delivery_status")
         public void setEndereco(String endereco) {
                 this.endereco = endereco;
         }

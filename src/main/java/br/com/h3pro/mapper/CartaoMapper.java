@@ -29,13 +29,14 @@ public interface CartaoMapper {
     @Mapping(source="cpf", target="cpf")
     @Mapping(source="bandeira", target="bandeira")
     Cartao mapCartao(CartaoDTO cartaoDTO);
-    
+
     @Mapping(source="idCartao", target="idCartao")
     @Mapping(source="situacao", target="situacao")
     @Mapping(source="dataEntrega", target="dataCriacao")
     @Mapping(source="observacao", target="observacao")
     @Mapping(source="endereco", target="endereco")
     Pedido mapPedido(PedidoDTO pedidoDTO);
+
 
 
 }

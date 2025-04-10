@@ -48,9 +48,6 @@ class CartaoResourceTest {
     @Test
     void testCartaoEndpointPost() {
 
-
-        doNothing().when(service).criarCliente(any(Cliente.class));
-
         given()
                 .contentType(ContentType.JSON)
                 .body(new ClienteDTO())

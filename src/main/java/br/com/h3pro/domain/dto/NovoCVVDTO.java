@@ -1,7 +1,9 @@
 package br.com.h3pro.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class NovoCVVDTO {
@@ -12,10 +14,11 @@ public class NovoCVVDTO {
     private long cartao;
     @JsonProperty("next_cvv")
     private int cvv;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("expiration_date")
-    LocalDateTime dataValiade;
+    LocalDate dataValiade;
 
-    public NovoCVVDTO(String cpf, long cartao, int cvv, LocalDateTime dataValiade) {
+    public NovoCVVDTO(String cpf, long cartao, int cvv, LocalDate dataValiade) {
         this.cpf = cpf;
         this.cartao = cartao;
         this.cvv = cvv;
@@ -37,27 +40,23 @@ public class NovoCVVDTO {
         return this.cvv;
     }
 
-    public LocalDateTime getDataValiade() {
+    public LocalDate getDataValiade() {
         return this.dataValiade;
     }
 
-    @JsonProperty("account_id")
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    @JsonProperty("card_id")
     public void setCartao(long cartao) {
         this.cartao = cartao;
     }
 
-    @JsonProperty("next_cvv")
     public void setCvv(int cvv) {
         this.cvv = cvv;
     }
 
-    @JsonProperty("expiration_date")
-    public void setDataValiade(LocalDateTime dataValiade) {
+    public void setDataValiade(LocalDate dataValiade) {
         this.dataValiade = dataValiade;
     }
 }

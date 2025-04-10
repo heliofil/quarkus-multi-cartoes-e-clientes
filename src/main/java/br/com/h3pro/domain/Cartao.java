@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Cartao extends PanacheEntityBase {
 
 
-    public Cartao(Long id, String numero, int cvv, String nomeTitular, String cpf, Boolean eDigital, Boolean eCancelado, Boolean eReemitido, MotivoDaReemissao motivoReemissao, LocalDate dataValidade, int bandeira, LocalDateTime dataCriacao, LocalDateTime dataAtualizacao) {
+    public Cartao(Long id, String numero, Integer cvv, String nomeTitular, String cpf, Boolean eDigital, Boolean eCancelado, Boolean eReemitido, Integer motivoReemissao, LocalDate dataValidade, Integer bandeira, LocalDateTime dataCriacao, LocalDateTime dataAtualizacao) {
         this.id = id;
         this.numero = numero;
         this.cvv = cvv;
@@ -39,7 +39,7 @@ public class Cartao extends PanacheEntityBase {
         return this.numero;
     }
 
-    public int getCvv() {
+    public Integer getCvv() {
         return this.cvv;
     }
 
@@ -59,7 +59,7 @@ public class Cartao extends PanacheEntityBase {
         return this.eCancelado;
     }
 
-    public MotivoDaReemissao getMotivoReemissao() {
+    public Integer getMotivoReemissao() {
         return this.motivoReemissao;
     }
 
@@ -67,7 +67,7 @@ public class Cartao extends PanacheEntityBase {
         return this.dataValidade;
     }
 
-    public int getBandeira() {
+    public Integer getBandeira() {
         return this.bandeira;
     }
 
@@ -87,7 +87,7 @@ public class Cartao extends PanacheEntityBase {
         this.numero = numero;
     }
 
-    public void setCvv(int cvv) {
+    public void setCvv(Integer cvv) {
         this.cvv = cvv;
     }
 
@@ -108,7 +108,7 @@ public class Cartao extends PanacheEntityBase {
     }
 
 
-    public void setMotivoReemissao(MotivoDaReemissao motivoReemissao) {
+    public void setMotivoReemissao(Integer motivoReemissao) {
         this.motivoReemissao = motivoReemissao;
     }
 
@@ -116,7 +116,7 @@ public class Cartao extends PanacheEntityBase {
         this.dataValidade = dataValidade;
     }
 
-    public void setBandeira(int bandeira) {
+    public void setBandeira(Integer bandeira) {
         this.bandeira = bandeira;
     }
 
@@ -128,11 +128,6 @@ public class Cartao extends PanacheEntityBase {
         this.dataAtualizacao = dataAtualizacao;
     }
 
-    public enum MotivoDaReemissao {
-
-        Perda, Roubo, Dano
-
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -141,7 +136,7 @@ public class Cartao extends PanacheEntityBase {
     @Column(name = "numero")
     String numero;
     @Column(name = "cvv")
-    int cvv;
+    Integer cvv;
     @Column(name = "nome_titular")
     String nomeTitular;
     @Column(name = "cpf")
@@ -151,11 +146,11 @@ public class Cartao extends PanacheEntityBase {
     @Column(name = "e_cancelado")
     Boolean eCancelado;
     @Column(name = "motivo_reemissao")
-    MotivoDaReemissao motivoReemissao;
+    Integer motivoReemissao;
     @Column(name = "data_validade")
     LocalDate dataValidade;
     @Column(name = "id_bandeira")
-    int bandeira;
+    Integer bandeira;
     @Column(name = "data_criacao")
     LocalDateTime dataCriacao;
     @Column(name = "data_atualizacao")

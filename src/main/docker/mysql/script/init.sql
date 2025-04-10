@@ -4,7 +4,7 @@ USE altdb;
 CREATE TABLE cliente(
   cpf CHAR(11) PRIMARY KEY,
   nome_completo VARCHAR(100) NOT NULL,
-  data_nascimento DATE NOT NULL,
+  data_nascimento TIMESTAMP NOT NULL,
   telefone VARCHAR(20),
   email VARCHAR(100),
   cep CHAR(8) NOT NULL,
@@ -50,7 +50,7 @@ INSERT INTO motivo_reemissao (id,nome, data_criacao, data_atualizacao) VALUES
 CREATE TABLE cartao(
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     numero VARCHAR(16) NOT NULL,
-    cvv TINYINT UNSIGNED NOT NULL,
+    cvv INT UNSIGNED NOT NULL,
     nome_titular VARCHAR(20) NOT NULL,
     cpf CHAR(11) NOT NULL,
     e_digital BOOL DEFAULT 0,
@@ -74,9 +74,9 @@ CREATE TABLE cartao(
 CREATE TABLE pedido(
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_cartao BIGINT UNSIGNED NOT NULL,
-    situacao ENUM (,
+    situacao ENUM ('EMITIDO','ENVIADO','RETORNO','ENTREGUE') NOT NULL,
     observacao VARCHAR(200),
-    endereco_entrega VARCHAR(250),
+    endereco_entrega VARCHAR(200),
     data_criacao TIMESTAMP,
     data_atualizacao TIMESTAMP,
     FOREIGN KEY (id_cartao) REFERENCES cartao(id)

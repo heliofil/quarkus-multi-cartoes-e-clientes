@@ -3,7 +3,8 @@ package br.com.h3pro.service;
 import br.com.h3pro.domain.Cartao;
 import br.com.h3pro.domain.Pedido;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 public interface CartaoService {
 
@@ -11,7 +12,8 @@ public interface CartaoService {
 
     Boolean atualizarPedido(Pedido pedido);
 
-    Boolean atualizaCVV(String cpf,long idCartao,int novoCVV, LocalDateTime dataValiade);
+    Boolean atualizaCVV(String cpf,long idCartao,int novoCVV, LocalDate dataValiade);
 
+    Cartao reemitirCartao(long idCartao, int motivo);
 
 }
